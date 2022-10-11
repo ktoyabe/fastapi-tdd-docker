@@ -1,0 +1,17 @@
+{
+    "name": "web",
+    "dockerComposeFile": [
+        "../docker-compose.yml"
+    ],
+    "settings": {
+        // Pylance
+		"python.languageServer": "Pylance",
+		"python.analysis.completeFunctionParens": true,
+    },
+    "extensions": [
+        "ms-python.python",
+		"ms-python.vscode-pylance",
+    ],
+    "service": "web",
+    "workspaceFolder": "/usr/src/app"
+}
