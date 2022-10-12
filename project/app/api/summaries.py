@@ -23,5 +23,10 @@ async def create_summary(payload: SummaryPayloadSchema) -> SummaryResponseSchema
 async def read_summary(id: int) -> SummarySchema:
     summary = await crud.get(id)
 
-    return summary
+    if not summary:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Summary not found"
+        )
 
+    return summary
