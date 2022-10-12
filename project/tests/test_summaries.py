@@ -3,6 +3,7 @@ import json
 import pytest
 from fastapi import status
 
+
 def test_create_summary(test_app_with_db):
     response = test_app_with_db.post(
         "/summaries/",
@@ -26,3 +27,23 @@ def test_create_summaries_invalid_json(test_app):
             }
         ]
     }
+
+
+def test_read_summary(test_app_with_db):
+    # given
+    response = test_app_with_db.post(
+        "/summaries/",
+        data=json.dumps({"url": "https://foo.bar"})
+    )
+    summary_id = response.json()["id"]
+
+    # when
+    response = test_app_with_db.get(f"/summaries/{summary_id}/")
+    assert response.status_code == status.HTTP_200_OK
+
+    # then
+    response_dict = response.json()
+    assert response_dict["id"] == summary_id
+    assert response_dict["url"] == "https://foo.bar"
+    assert response_dict["summary"]
+    assert response_dict["created_at"]
