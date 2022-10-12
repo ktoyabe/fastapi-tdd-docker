@@ -1,4 +1,4 @@
-.PHONY: help build-local up down logs ps psql
+.PHONY: help build-local up down logs ps psql test
 .DEFAULT_GOAL := help
 
 build-local:
@@ -24,6 +24,11 @@ init_migration:
 init_db:
 	docker-compose exec web aerich init-db
 
+migration:
+	docker-compose exec web aerich upgrade
+
+test:
+	docker-compose exec web python -m pytest
 
 help: ## Show options
 	@grep -E '^[a-zA-Z_]+:.*?## .*$$' $(MAKEFILE_LIST) | \
