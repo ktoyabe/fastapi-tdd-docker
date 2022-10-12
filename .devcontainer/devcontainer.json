@@ -3,15 +3,28 @@
     "dockerComposeFile": [
         "../docker-compose.yml"
     ],
-    "settings": {
-        // Pylance
-		"python.languageServer": "Pylance",
-		"python.analysis.completeFunctionParens": true
-    },
-    "extensions": [
-        "ms-python.python",
-		"ms-python.vscode-pylance"
-    ],
+    // Configure tool-specific properties.
+    "customizations": {
+      // Configure properties specific to VS Code.
+      "vscode": {
+        // Set *default* container specific settings.json values on container create.
+        "settings": { 
+          "terminal.integrated.profiles.linux": {
+            "bash": {
+              "path": "/bin/bash"
+            }
+          },
+          "python.defaultInterpreterPath": "/usr/local/bin/python",
+          "python.languageServer": "Default"
+        },
+        
+        // Add the IDs of extensions you want installed when the container is created.
+        "extensions": [
+          "ms-python.python",
+          "ms-python.vscode-pylance"
+        ]
+      }
+    },    
     "service": "web",
     "workspaceFolder": "/usr/src/app"
 }
